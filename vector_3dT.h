@@ -126,15 +126,23 @@ return *this;
 //-----------------------------------------------------------------------
 template <typename T> vector3d<T>& vector3d<T>::operator+=(T k) {
 // implement code here
+for (int i = 0; i <3;++i){u[i] += k[i]}
+return *this;
 }
 template <typename T> vector3d<T>& vector3d<T>::operator*=(T k) {
 // implement code here
+for (int i = 0; i <3;++i){u[i] *= k[i]}
+return *this;
 }
 template <typename T> vector3d<T>& vector3d<T>::operator-=(T k) {
 // implement code here
+for (int i = 0; i <3;++i){u[i] -= k[i]}
+return *this;
 }
 template <typename T> vector3d<T>& vector3d<T>::operator/=(T k) {
 // implement code here
+for (int i = 0; i <3;++i){u[i] /= k[i]}
+return *this;
 };
 //-----------------------------------------------------------------------
 template <typename T> vector3d<T> vector3d<T>::operator-() {
@@ -148,6 +156,7 @@ return vector3d<T>(u.name_ + "+" + v.name_, dims_, {u[0] + v[0], u[1] + v[1], u[
 }
 template <typename T> vector3d<T> vector3d<T>::operator-(const vector3d<T>& v) {
 // implement code here
+
 }
 //-----------------------------------------------------------------------
 template <typename T> bool vector3d<T>::operator==(const vector3d<T>& v) const {

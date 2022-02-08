@@ -175,6 +175,11 @@ return !(*this == v);
 //-----------------------------------------------------------------------
 template <typename T> T vector3d<T>::dot(const vector3d<T>& v) const {
 // implement code here
+//Prof expained that this is the dot product and that it'll be MUCH easier to calculate than Cross Product
+//Which has already been done for us
+
+
+
 }
 template <typename T> T vector3d<T>::magnitude() const { return sqrt(dot(*this)); }
 template <typename T> T vector3d<T>::angle(const vector3d<T>& v) const {

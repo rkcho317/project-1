@@ -179,16 +179,17 @@ template <typename T> T vector3d<T>::dot(const vector3d<T>& v) const {
 //Which has already been done for us
     const vector3d<T>& u = *this;
     check_equal_dims(v);
-    int product = 0;
+    int dot_pro = 0;
     for (int i =0; i < v.dims_ ; i++){
-        product = product + u[i] * v[i];
+        dot_pro = dot_pro + u[i] * v[i];
     }
-    return product;
+    return dot_pro;
 }
 
 template <typename T> T vector3d<T>::magnitude() const { return sqrt(dot(*this)); }
 template <typename T> T vector3d<T>::angle(const vector3d<T>& v) const {
 // implement code here
+
 }
 template <typename T> vector3d<T> vector3d<T>::cross(const vector3d<T>& v) const {
     const vector3d<T>& u = *this;

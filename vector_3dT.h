@@ -107,6 +107,7 @@ return data_[i];
 }
 template <typename T> T& vector3d<T>::operator[](int i) { // read-write index operator
 // implement code here
+
 }
 //-----------------------------------------------------------------------
 template <typename T> void vector3d<T>::name(const std::string& name) { name_ = name; }
@@ -119,6 +120,8 @@ return *this;
 }
 template <typename T> vector3d<T>& vector3d<T>::operator-=(const vector3d<T>& v) {
 // implement code here
+for(int i = 0;i<3;++i){ u[i] *= v[i]}
+return *this;
 }
 //-----------------------------------------------------------------------
 template <typename T> vector3d<T>& vector3d<T>::operator+=(T k) {

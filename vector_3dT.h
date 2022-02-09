@@ -189,6 +189,10 @@ template <typename T> T vector3d<T>::dot(const vector3d<T>& v) const {
 template <typename T> T vector3d<T>::magnitude() const { return sqrt(dot(*this)); }
 template <typename T> T vector3d<T>::angle(const vector3d<T>& v) const {
 // implement code here
+    double dot = this->dot(v);
+    double mag = this->magnitude();
+    double vmag = v.magnitiude();
+    return acos(dot / (mag*vmag));
 
 }
 template <typename T> vector3d<T> vector3d<T>::cross(const vector3d<T>& v) const {

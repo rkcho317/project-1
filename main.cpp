@@ -4,9 +4,12 @@
 #include <cassert>
 #include "matrix_3dT.h"
 #include "vector_3dT.h"
-
-#define _USE_MATH_DEFINES
 #include <cmath>
+
+//#define _USE_MATH_DEFINES 
+#define M_PI 3.14159265358979323846
+#define M_PI_2 = M_PI 
+
 
 
 template <typename T>

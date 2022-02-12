@@ -107,7 +107,8 @@ return data_[i];
 }
 template <typename T> T& vector3d<T>::operator[](int i) { // read-write index operator
 // implement code here
-
+    check_bounds(i);
+    return data_[i]&;
 }
 //-----------------------------------------------------------------------
 template <typename T> void vector3d<T>::name(const std::string& name) { name_ = name; }
@@ -226,5 +227,6 @@ if (dims_ != v.dims_) { throw new std::invalid_argument("vector3d dims mismatch"
 }
 template <typename T> void vector3d<T>::check_bounds(int i) const {
 // implement code here
+    return data[i];
 }
 #endif

@@ -54,15 +54,48 @@ friend matrix3d operator-(const matrix3d& a, T k) { return a + -k; }
 
 friend matrix3d operator-(T k, const matrix3d& a) {
 // implement code here
+return -k + a;
 }
 
 friend matrix3d operator*(const matrix3d& a, T k) {
 // implement code here
+size_t R;
+size_t S; 
+
+int prod [R][S]; 
+int size = a.size();
+for (int m = 0; m < size; m++){
+    for (int n = 0; n<size;n++){
+        int summa = 0;
+        for(int o = 0; o<size;o++){
+            summa += (a[m][o] * k[o][n]);
+        }
+        prod [m][n]= summa;
+    }
+}
 }
 
 friend matrix3d<T> operator*(T k, const matrix3d& a) { return a * k; }
 friend matrix3d operator/(const matrix3d& a, T k) {
 // implement code here
+size_t R;
+size_t S; 
+
+//create inverse
+
+
+//multiple the inverse
+int prod [R][S]; 
+int size = a.size();
+for (int m = 0; m < size; m++){
+    for (int n = 0; n<size;n++){
+        int summa = 0;
+        for(int o = 0; o<size;o++){
+            summa += (a[m][o] * k[o][n]);
+        }
+        prod [m][n]= summa;
+    }
+}
 }
 //=======================================================================
 friend matrix3d operator*(const matrix3d& m, const vector3d<T>& v) {

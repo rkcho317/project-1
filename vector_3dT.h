@@ -233,10 +233,10 @@ if (dims_ != v.dims_) { throw new std::invalid_argument("vector3d dims mismatch"
 }
 template <typename T> void vector3d<T>::check_bounds(int i) const {
 // implement code here
-
-int size = dysize();
+const vector3d<T>& u;
+int size = u.size();
 if (i>=size || i <0){
-    throw new std::invalid_argument("bounds not met");
+    throw new std::invalid_argument("bounds not met");;
 }
 }
 #endif

@@ -81,12 +81,10 @@ friend matrix3d operator/(const matrix3d& a, T k) {
 size_t R;
 size_t S; 
 
-//create inverse
-
 
 //multiple the inverse
 int prod [R][S]; 
-int size = a.size();
+int size = k.size();
 for (int m = 0; m < size; m++){
     for (int n = 0; n<size;n++){
         int summa = 0;
@@ -100,6 +98,7 @@ for (int m = 0; m < size; m++){
 //=======================================================================
 friend matrix3d operator*(const matrix3d& m, const vector3d<T>& v) {
 // implement code here
+
 }
 friend matrix3d operator*(const vector3d<T>& v, const matrix3d& m) {
 // implement code here
@@ -252,6 +251,23 @@ const matrix3d<T>& m = *this;
 }
 template <typename T> T matrix3d<T>::determinant() const {
 // implement code here
+//create inverse
+
+//1. Find 1/determinant
+ int row1;
+ int row2;
+ int dete; 
+
+ row1 = k[1][1] * k[2][2];
+ row2 = k[1][2] * k[2][2];
+ dete = 1 / (row1-row2);
+
+ //2. Multiply 1/determinant by [ [2][2]   -[1][2]]
+ //                             [ -[1][2]   [1][1]]
+
+ int flip_a [R][S] = {{k[2][2],-k[1][2], {-k[1][2],k[1][1]}}};
+  k[R][S] = dete * flip_a;
+
 }
 template <typename T> T matrix3d<T>::trace() const {
 const matrix3d<T>& m = *this;
@@ -290,6 +306,23 @@ template <typename T> matrix3d<T> matrix3d<T>::adjugate() const {
 }
 template <typename T> matrix3d<T> matrix3d<T>::inverse() const {
 // implement code here
+//create inverse
+
+//1. Find 1/determinant
+ int row1;
+ int row2;
+ int dete; 
+
+ row1 = k[1][1] * k[2][2];
+ row2 = k[1][2] * k[2][2];
+ dete = 1 / (row1-row2);
+
+ //2. Multiply 1/determinant by [ [2][2]   -[1][2]]
+ //                             [ -[1][2]   [1][1]]
+
+ int flip_a [R][S] = {{k[2][2],-k[1][2], {-k[1][2],k[1][1]}}};
+  k[R][S] = dete * flip_a;
+
 }
 //=================================================================================================
 template <typename T> matrix3d<T> matrix3d<T>::identity(int dims) {

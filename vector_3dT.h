@@ -49,11 +49,11 @@ friend vector3d operator+(const vector3d& v, T k) { return k + v; }
 friend vector3d operator-(const vector3d& v, T k) { return -k + v; }
 friend vector3d operator-(T k, const vector3d& v) {
 // implement code here
-return -v + k
+return -v + k;
 }
 friend vector3d operator*(T k, const vector3d& v) {
 // implement code here
-return k * v
+return k * v;
 }
 friend vector3d operator*(const vector3d& v, T k) { return k * v; }
 friend vector3d operator/(const vector3d& v, T k) {
@@ -108,7 +108,7 @@ return data_[i];
 template <typename T> T& vector3d<T>::operator[](int i) { // read-write index operator
 // implement code here
     check_bounds(i);
-    return data_[i]&;
+    return data_[i] = data_[i-1] ;
 }
 //-----------------------------------------------------------------------
 template <typename T> void vector3d<T>::name(const std::string& name) { name_ = name; }
@@ -121,28 +121,33 @@ return *this;
 }
 template <typename T> vector3d<T>& vector3d<T>::operator-=(const vector3d<T>& v) {
 // implement code here
-for(int i = 0;i<3;++i){ u[i] *= v[i]}
+vector3d<T>& u = *this;
+for(int i = 0;i<3;++i){ u[i] -= v[i];}
 return *this;
 }
 //-----------------------------------------------------------------------
 template <typename T> vector3d<T>& vector3d<T>::operator+=(T k) {
 // implement code here
-for (int i = 0; i <3;++i){u[i] += k[i]}
+vector3d<T>& u = *this;
+for (int i = 0; i <3;++i){u[i] += k[i];}
 return *this;
 }
 template <typename T> vector3d<T>& vector3d<T>::operator*=(T k) {
 // implement code here
-for (int i = 0; i <3;++i){u[i] *= k[i]}
+vector3d<T>& u = *this;
+for (int i = 0; i <3;++i){u[i] *= k[i];}
 return *this;
 }
 template <typename T> vector3d<T>& vector3d<T>::operator-=(T k) {
 // implement code here
-for (int i = 0; i <3;++i){u[i] -= k[i]}
+vector3d<T>& u = *this;
+for (int i = 0; i <3;++i){u[i] -= k[i];}
 return *this;
 }
 template <typename T> vector3d<T>& vector3d<T>::operator/=(T k) {
 // implement code here
-for (int i = 0; i <3;++i){u[i] /= k[i]}
+vector3d<T>& u = *this;
+for (int i = 0; i <3;++i){u[i] /= k[i];}
 return *this;
 };
 //-----------------------------------------------------------------------
@@ -155,9 +160,10 @@ const vector3d<T>& u = *this;
 check_equal_dims(v);
 return vector3d<T>(u.name_ + "+" + v.name_, dims_, {u[0] + v[0], u[1] + v[1], u[2] + v[2], 0});
 }
+
 template <typename T> vector3d<T> vector3d<T>::operator-(const vector3d<T>& v) {
 // implement code here
-cont vector3d<T>& u = *this;
+const vector3d<T>& u = *this;
 check_equal_dims(v);
 return vector3d<T>(u.name_ + "-" + v.name_, dims_, {u[0] + -v[0], u[1] + -v[1], u[2] + -v[2], 0});
 
@@ -227,6 +233,10 @@ if (dims_ != v.dims_) { throw new std::invalid_argument("vector3d dims mismatch"
 }
 template <typename T> void vector3d<T>::check_bounds(int i) const {
 // implement code here
-    return data[i];
+
+int size = dysize();
+if (i>=size || i <0){
+    throw new std::invalid_argument("bounds not met");
+}
 }
 #endif

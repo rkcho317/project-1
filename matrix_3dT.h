@@ -251,24 +251,17 @@ const matrix3d<T>& m = *this;
 }
 template <typename T> T matrix3d<T>::determinant() const {
 // implement code here
-//create inverse
-
-//1. Find 1/determinant
+const matrix3d<T>& m = *this;
  int row1;
  int row2;
  int dete; 
 
- row1 = k[1][1] * k[2][2];
- row2 = k[1][2] * k[2][2];
+ row1 = m[1][1] * m[2][2];
+ row2 = m[1][2] * m[2][2];
  dete = 1 / (row1-row2);
-
- //2. Multiply 1/determinant by [ [2][2]   -[1][2]]
- //                             [ -[1][2]   [1][1]]
-
- int flip_a [R][S] = {{k[2][2],-k[1][2], {-k[1][2],k[1][1]}}};
-  k[R][S] = dete * flip_a;
-
+return dete;
 }
+
 template <typename T> T matrix3d<T>::trace() const {
 const matrix3d<T>& m = *this;
 return m(0,0) + m(1,1) + m(2,2);
@@ -306,27 +299,24 @@ template <typename T> matrix3d<T> matrix3d<T>::adjugate() const {
 }
 template <typename T> matrix3d<T> matrix3d<T>::inverse() const {
 // implement code here
-//create inverse
-
+const matrix3d<T>& m = *this;
+size_t R;
+size_t S;
 //1. Find 1/determinant
- int row1;
- int row2;
- int dete; 
-
- row1 = k[1][1] * k[2][2];
- row2 = k[1][2] * k[2][2];
- dete = 1 / (row1-row2);
+int detr = determinant();
 
  //2. Multiply 1/determinant by [ [2][2]   -[1][2]]
  //                             [ -[1][2]   [1][1]]
 
- int flip_a [R][S] = {{k[2][2],-k[1][2], {-k[1][2],k[1][1]}}};
-  k[R][S] = dete * flip_a;
+ int flip_m [R][S] = {{m[2][2],-m[1][2], {-m[1][2]mk[1][1]}}};
+  m[R][S] = detr * flip_m;
 
+return this*;
 }
 //=================================================================================================
 template <typename T> matrix3d<T> matrix3d<T>::identity(int dims) {
 // implement code here
+
 }
 template <typename T> matrix3d<T> matrix3d<T>::zero(int dims) {
 // implement code here

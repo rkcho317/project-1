@@ -152,6 +152,7 @@ check_bounds(i); return cols_[i];
 }
 template <typename T> T matrix3d<T>::operator()(int row, int col) const {
 // implement code here
+ 
 }
 template <typename T> T& matrix3d<T>::operator()(int row, int col) {
 // implement code here

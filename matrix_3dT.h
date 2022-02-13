@@ -215,6 +215,7 @@ template <typename T> matrix3d<T>& matrix3d<T>::operator+=(const matrix3d<T>& b)
 }
 template <typename T> matrix3d<T>& matrix3d<T>::operator-=(const matrix3d<T>& b) {
 // implement code here
+
 }
 //=================================================================================================
 template <typename T> matrix3d<T> matrix3d<T>::operator-() {
@@ -229,6 +230,9 @@ return matrix3d<T>(name_ + "+" + b.name_, dims_, {a[0] + b[0], a[1] + b[1], a[2]
 }
 template <typename T> matrix3d<T> matrix3d<T>::operator-(const matrix3d<T>& b) {
 // implement code here
+const matrix3d<T>& a = *this;
+
+return matrix3d<T>(name_ + "+" + b.name_, dims_, {a[0] + -b[0], a[1] + -b[1], a[2] + -b[2]});
 }
 //=================================================================================================
 template <typename T> matrix3d<T> matrix3d<T>::operator*(const matrix3d<T>& b) {
@@ -316,10 +320,15 @@ return this*;
 //=================================================================================================
 template <typename T> matrix3d<T> matrix3d<T>::identity(int dims) {
 // implement code here
+const matrix3d<T>& m = *this;
+int inv_m[dims][dims] = inverse(m); 
+ return   m*=inv_m;
 
 }
 template <typename T> matrix3d<T> matrix3d<T>::zero(int dims) {
 // implement code here
+ int zero_matrix [dims][dims] = {0};
+ return this*;
 }
 template <typename T> bool matrix3d<T>::operator==(const matrix3d<T>& b) const {
 check_equal_dims(b);

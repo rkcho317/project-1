@@ -286,12 +286,11 @@ const matrix3d<T>& m = *this;
 // implement code here
 
 int rows, col; 
-
 matrix3d<T> trans_m(rows,col); 
 
 for (unsigned int t = 0; t< rows; t++){
     for(unsigned int r=0; r< col; r++){
-        trans_m[r][t] = operator()(t,r);
+        trans_m(r,t) = operator()(t,r);
     }
 }
 }
@@ -346,24 +345,26 @@ template <typename T> matrix3d<T> matrix3d<T>::cofactor() const {
 }
 template <typename T> matrix3d<T> matrix3d<T>::adjugate() const {
 // implement code here
-    return cofactor(transpose());
+    return cofactor().transpose();
 }
 template <typename T> matrix3d<T> matrix3d<T>::inverse() const {
 // implement code here
-    int adj = adjugate(); 
-    return adj/determinant();
+    
+    return adjugate()/determinant();
 }
 //=================================================================================================
 template <typename T> matrix3d<T> matrix3d<T>::identity(int dims) {
 // implement code here
-check_bounds(dims);
-for (unsigned int id = 0; id<dims;id++){
-    for(unsigned int en = 0;en<dims;en++){
-        if (id==en){
-            operator()(id,en) = static_cast<T>(1.0);
-        } 
+  double identity_matrix[dims][dims] = {0.0};
+
+    for (unsigned int id = 0; id<dims;id++){
+        for(unsigned int en = 0;en<dims;en++){
+        if (id == en){
+            identity_matrix[id][en] = 1.0 ;
+        }
     }
-}
+    }
+return identity_matrix;
 }
 
 template <typename T> matrix3d<T> matrix3d<T>::zero(int dims) {

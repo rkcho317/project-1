@@ -48,7 +48,7 @@ friend vector3d operator+(const vector3d& v, T k) { return k + v; }
 friend vector3d operator-(const vector3d& v, T k) { return -k + v; }
 friend vector3d operator-(T k, const vector3d& v) {
 // implement code here
-return -v + k;
+return k - v;
 }
 friend vector3d operator*(T k, const vector3d& v) {
 // implement code here
@@ -57,7 +57,7 @@ return k * v;
 friend vector3d operator*(const vector3d& v, T k) { return k * v; }
 friend vector3d operator/(const vector3d& v, T k) {
 // implement code here
-return k / v ;
+return v/k;
 }
 //-----------------------------------------------------------------------
 bool operator==(const vector3d<T>& v) const;
@@ -197,7 +197,7 @@ template <typename T> T vector3d<T>::angle(const vector3d<T>& v) const {
 // implement code here
     double dot = this->dot(v);
     double mag = this->magnitude();
-    double vmag = v.magnitiude();
+    double vmag = v.magnitude();
     return acos(dot / (mag*vmag));
 
 }

@@ -1,7 +1,6 @@
 #ifndef __matrix3d_T_H__
 #define __matrix3d_T_H__
-#define _USE_MATH_DEFINES
-#include <cmath>
+
 #include <cstring>
 #include "vector_3dT.h"
 
@@ -60,9 +59,9 @@ return -k + a;
 friend matrix3d operator*(const matrix3d& a, T k) {
 // implement code here
 size_t R;
-size_t S; 
+size_t C; 
 
-int prod [R][S]; 
+int prod [R][C]; 
 int size = a.size();
 for (int m = 0; m < size; m++){
     for (int n = 0; n<size;n++){
@@ -78,30 +77,58 @@ for (int m = 0; m < size; m++){
 friend matrix3d<T> operator*(T k, const matrix3d& a) { return a * k; }
 friend matrix3d operator/(const matrix3d& a, T k) {
 // implement code here
-size_t R;
-size_t S; 
+    size_t R;
+    size_t S; 
 
 
-//multiple the inverse
-int prod [R][S]; 
-int size = k.size();
-for (int m = 0; m < size; m++){
-    for (int n = 0; n<size;n++){
-        int summa = 0;
-        for(int o = 0; o<size;o++){
-            summa += (a[m][o] * k[o][n]);
+    //multiply the inverse
+    int prod [R][S]; 
+    int size = a.size();
+    for (int m = 0; m < size; m++){
+        for (int n = 0; n<size;n++){
+            int summa = 0;
+            for(int o = 0; o<size;o++){
+                summa += (a[m][o] * k[o][n]);
+            }
+            prod [m][n]= summa;
         }
-        prod [m][n]= summa;
     }
-}
 }
 //=======================================================================
 friend matrix3d operator*(const matrix3d& m, const vector3d<T>& v) {
 // implement code here
+    size_t R;
+    size_t C; 
+    int prod [R][C]; 
+    int size =  m.size();
+
+    for (int m = 0; m < size; m++){
+        for (int n = 0; n<size;n++){
+            int summa = 0;
+            for(int o = 0; o<size;o++){
+                summa += (m[m][o] * v[o][n]);
+            }
+            prod [m][n]= summa;
+        }
+    }
 
 }
 friend matrix3d operator*(const vector3d<T>& v, const matrix3d& m) {
 // implement code here
+    size_t R;
+    size_t C; 
+
+    int prod [R][C]; 
+    int size = a.size();
+    for (int m = 0; m < size; m++){
+        for (int n = 0; n<size;n++){
+            int summa = 0;
+            for(int o = 0; o<size;o++){
+                summa += (v[m][o] * m[o][n]);
+            }
+            prod [m][n]= summa;
+        }
+    }
 }
 matrix3d<T> operator*(const matrix3d<T>& b);
 //=======================================================================
@@ -184,13 +211,22 @@ check_bounds(i); return cols_[i];
 }
 template <typename T> T matrix3d<T>::operator()(int row, int col) const {
 // implement code here
- 
+    int i;
+    check_bounds(i); 
+    return cols_[row][col];
+
 }
 template <typename T> T& matrix3d<T>::operator()(int row, int col) {
 // implement code here
+    int i;
+    check_bounds(i); 
+    *this = cols_[row][col];
+    return *this;
 }
-template <typename T> T* matrix3d<T>::opengl_memory() { // constant ptr
+template <typename T> T* matrix3d<T>::opengl_memory(int row, int col) { // constant ptr
 // implement code here
+    *this = 
+    return *this;
 }
 //=================================================================================================
 template <typename T> void matrix3d<T>::name(const std::string& name) { name_ = name; }
@@ -205,16 +241,24 @@ return *this;
 template <typename T> matrix3d<T>& matrix3d<T>::operator-=(T k) { *this += -k; return *this; }
 template <typename T> matrix3d<T>& matrix3d<T>::operator*=(T k) {
 // implement code here
+    *this *= k;
+    return *this;
 }
 template <typename T> matrix3d<T>& matrix3d<T>::operator/=(T k) {
 // implement code here
+    *this /= k;
+    return *this;
 }
 //=================================================================================================
 template <typename T> matrix3d<T>& matrix3d<T>::operator+=(const matrix3d<T>& b) {
 // implement code here
+    *this += b;
+    return *this;
 }
 template <typename T> matrix3d<T>& matrix3d<T>::operator-=(const matrix3d<T>& b) {
 // implement code here
+    *this -= b;
+    return *this;
 
 }
 //=================================================================================================
@@ -253,9 +297,9 @@ template <typename T> matrix3d<T> matrix3d<T>::transpose() const {
 const matrix3d<T>& m = *this;
 // implement code here
 int size = m.size();
-size_T X ;
-size_T Y;
-size_T Z;
+size_t X ;
+size_t Y;
+size_t Z;
 
 int trans_m[X][Y][Z]; 
 
@@ -274,6 +318,7 @@ const matrix3d<T>& m = *this;
 
  row1 = m[1][1] * m[2][2];
  row2 = m[1][2] * m[2][2];
+
  dete = 1 / (row1-row2);
 return dete;
 }

@@ -225,7 +225,9 @@ template <typename T> T& matrix3d<T>::operator()(int row, int col) {
 }
 template <typename T> T* matrix3d<T>::opengl_memory(int row, int col) { // constant ptr
 // implement code here
-    *this = 
+    int i;
+    check_bounds(i); 
+    *this = cols_[row][col];
     return *this;
 }
 //=================================================================================================

@@ -26,7 +26,7 @@ vector3d<T> operator[](int i) const;
 vector3d<T>& operator[](int i);
 T operator()(int row, int col) const;
 T& operator()(int row, int col);
-T* opengl_memory();
+T* opengl_memory(int row, int col);
 //=======================================================================
 void name(const std::string& name);
 const std::string& name() const;
@@ -106,7 +106,7 @@ friend matrix3d operator*(const matrix3d& m, const vector3d<T>& v) {
         for (int n = 0; n<size;n++){
             int summa = 0;
             for(int o = 0; o<size;o++){
-                summa += (m[m][o] * v[o][n]);
+                summa += (m[m] * v[o][n]);
             }
             prod [m][n]= summa;
         }
@@ -124,7 +124,7 @@ friend matrix3d operator*(const vector3d<T>& v, const matrix3d& m) {
         for (int n = 0; n<size;n++){
             int summa = 0;
             for(int o = 0; o<size;o++){
-                summa += (v[m][o] * m[o][n]);
+                summa += (v[m][o] * m[o]);
             }
             prod [m][n]= summa;
         }
@@ -211,17 +211,13 @@ check_bounds(i); return cols_[i];
 }
 template <typename T> T matrix3d<T>::operator()(int row, int col) const {
 // implement code here
-    int i;
-    check_bounds(i); 
-    return cols_[row][col];
-
+    operator[];
+    return cols_[col+(cols_*row)];
 }
 template <typename T> T& matrix3d<T>::operator()(int row, int col) {
 // implement code here
-    int i;
-    check_bounds(i); 
-    *this = cols_[row][col];
-    return *this;
+    operator[];
+    return cols_[col+(cols_*row)];
 }
 template <typename T> T* matrix3d<T>::opengl_memory(int row, int col) { // constant ptr
 // implement code here
@@ -364,21 +360,22 @@ template <typename T> matrix3d<T> matrix3d<T>::adjugate() const {
 }
 template <typename T> matrix3d<T> matrix3d<T>::inverse() const {
 // implement code here
-    return adjguate()/determinant();
+    int adj = adjugate(); 
+    return adj/determinant();
 }
 //=================================================================================================
 template <typename T> matrix3d<T> matrix3d<T>::identity(int dims) {
 // implement code here
-const matrix3d<T>& m = *this;
-int inv_m[dims][dims] = inverse(m); 
- return   m*=inv_m;
+
 
 }
+
 template <typename T> matrix3d<T> matrix3d<T>::zero(int dims) {
 // implement code here
  int zero_matrix [dims][dims] = {0};
- return *this;
+ return zero_matrix;
 }
+
 template <typename T> bool matrix3d<T>::operator==(const matrix3d<T>& b) const {
 check_equal_dims(b);
 const matrix3d<T>& a = *this;

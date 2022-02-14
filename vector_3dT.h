@@ -3,7 +3,7 @@
 #include <iostream>
 #include <cstring>
 #include <initializer_list>
-
+#include <cmath>
 
 
 template <typename T> class vector3d;

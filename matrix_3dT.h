@@ -252,6 +252,18 @@ a(2,0)*b(0,2) + a(2,1)*b(1,2) + a(2,2)*b(2,2)} );
 template <typename T> matrix3d<T> matrix3d<T>::transpose() const {
 const matrix3d<T>& m = *this;
 // implement code here
+int size = m.size();
+size_T X ;
+size_T Y;
+size_T Z;
+
+int trans_m[X][Y][Z]; 
+
+for (int t = 0; t<size; t++){
+    for(int r=0; r<size; r++){
+        m[r][t] = trans_m[t][r];
+    }
+}
 }
 template <typename T> T matrix3d<T>::determinant() const {
 // implement code here

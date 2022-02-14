@@ -212,12 +212,12 @@ check_bounds(i); return cols_[i];
 template <typename T> T matrix3d<T>::operator()(int row, int col) const {
 // implement code here
     operator[];
-    return cols_[col+(cols_*row)];
+    return dims_[col+(cols_*row)];
 }
 template <typename T> T& matrix3d<T>::operator()(int row, int col) {
 // implement code here
     operator[];
-    return cols_[col+(cols_*row)];
+    return dims_[col+(cols_*row)];
 }
 template <typename T> T* matrix3d<T>::opengl_memory(int row, int col) { // constant ptr
 // implement code here

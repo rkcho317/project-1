@@ -119,7 +119,7 @@ friend matrix3d operator*(const vector3d<T>& v, const matrix3d& m) {
     size_t C; 
 
     int prod [R][C]; 
-    int size = a.size();
+    int size = v.size();
     for (int m = 0; m < size; m++){
         for (int n = 0; n<size;n++){
             int summa = 0;
@@ -301,7 +301,7 @@ const matrix3d<T>& m = *this;
 
 int rows, col; 
 
-matrix3D<T> trans_m(rows,col); 
+matrix3d<T> trans_m(rows,col); 
 
 for (unsigned int t = 0; t< rows; t++){
     for(unsigned int r=0; r< col; r++){
@@ -356,11 +356,11 @@ template <typename T> matrix3d<T> matrix3d<T>::cofactor() const {
 // implement code here
    // -1 ^ (i+j) * minors.()(i,j)
    int i, j;
-   -1^(i,j) * minors.()(i.j); 
+   -1^(i,j) * minors()(i,j); 
 }
 template <typename T> matrix3d<T> matrix3d<T>::adjugate() const {
 // implement code here
-    return cofactor.transpose();
+    return cofactor(transpose());
 }
 template <typename T> matrix3d<T> matrix3d<T>::inverse() const {
 // implement code here
@@ -377,7 +377,7 @@ int inv_m[dims][dims] = inverse(m);
 template <typename T> matrix3d<T> matrix3d<T>::zero(int dims) {
 // implement code here
  int zero_matrix [dims][dims] = {0};
- return this*;
+ return *this;
 }
 template <typename T> bool matrix3d<T>::operator==(const matrix3d<T>& b) const {
 check_equal_dims(b);

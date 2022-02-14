@@ -366,12 +366,19 @@ template <typename T> matrix3d<T> matrix3d<T>::inverse() const {
 //=================================================================================================
 template <typename T> matrix3d<T> matrix3d<T>::identity(int dims) {
 // implement code here
-    int ident_matrix[dims][dims] = {{1,0,0},{0,1,0},{0,0,1}};
-    return ident_matrix;
+check_bounds(dims);
+for (unsigned int id = 0; id<dims;id++){
+    for(unsigned int en = 0;en<dims;en++){
+        if (id==en){
+            operator()(id,en) = static_cast<T>(1.0);
+        } 
+    }
+}
 }
 
 template <typename T> matrix3d<T> matrix3d<T>::zero(int dims) {
 // implement code here
+check_bounds(dims);
  int zero_matrix [dims][dims] = {0};
  return zero_matrix;
 }

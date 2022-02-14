@@ -366,8 +366,8 @@ template <typename T> matrix3d<T> matrix3d<T>::inverse() const {
 //=================================================================================================
 template <typename T> matrix3d<T> matrix3d<T>::identity(int dims) {
 // implement code here
-
-
+    int ident_matrix[dims][dims] = {{1,0,0},{0,1,0},{0,0,1}};
+    return ident_matrix;
 }
 
 template <typename T> matrix3d<T> matrix3d<T>::zero(int dims) {

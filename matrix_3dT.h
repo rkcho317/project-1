@@ -298,16 +298,14 @@ a(2,0)*b(0,2) + a(2,1)*b(1,2) + a(2,2)*b(2,2)} );
 template <typename T> matrix3d<T> matrix3d<T>::transpose() const {
 const matrix3d<T>& m = *this;
 // implement code here
-int size = m.size();
-size_t X ;
-size_t Y;
-size_t Z;
 
-int trans_m[X][Y][Z]; 
+int rows, col; 
 
-for (int t = 0; t<size; t++){
-    for(int r=0; r<size; r++){
-        m[r][t] = trans_m[t][r];
+matrix3D<T> trans_m(rows,col); 
+
+for (unsigned int t = 0; t< rows; t++){
+    for(unsigned int r=0; r< col; r++){
+        trans_m[r][t] = operator()(t,r);
     }
 }
 }
@@ -356,25 +354,16 @@ return matrix3d<T>("Min(" + name_ + ")", 3, {
 
 template <typename T> matrix3d<T> matrix3d<T>::cofactor() const {
 // implement code here
+   // -1 ^ (i+j) * minors.()(i,j)
+   
 }
 template <typename T> matrix3d<T> matrix3d<T>::adjugate() const {
 // implement code here
+    return cofactor.transpose();
 }
 template <typename T> matrix3d<T> matrix3d<T>::inverse() const {
 // implement code here
-const matrix3d<T>& m = *this;
-size_t R;
-size_t S;
-//1. Find 1/determinant
-int detr = determinant();
-
- //2. Multiply 1/determinant by [ [2][2]   -[1][2]]
- //                             [ -[1][2]   [1][1]]
-
- int flip_m [R][S] = {{m[2][2],-m[1][2], {-m[1][2]mk[1][1]}}};
-  m[R][S] = detr * flip_m;
-
-return this*;
+    return adjguate()/determinant();
 }
 //=================================================================================================
 template <typename T> matrix3d<T> matrix3d<T>::identity(int dims) {

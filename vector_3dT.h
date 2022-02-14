@@ -1,3 +1,5 @@
+//Rosa Cho, 888244357
+//Stephen Merwin, 887500593
 #ifndef __vector3d_T_H__
 #define __vector3d_T_H__
 #include <iostream>

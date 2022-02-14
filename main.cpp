@@ -1,3 +1,5 @@
+//Rosa Cho, 888244357
+//Stephen Merwin, 887500593
 #include <iostream>
 #include <cstring>
 #include <initializer_list>

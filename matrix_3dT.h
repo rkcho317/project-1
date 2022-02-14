@@ -53,80 +53,48 @@ friend matrix3d operator-(const matrix3d& a, T k) { return a + -k; }
 
 friend matrix3d operator-(T k, const matrix3d& a) {
 // implement code here
-return -k + a;
+return k + -a;
 }
 
 friend matrix3d operator*(const matrix3d& a, T k) {
 // implement code here
-size_t R;
-size_t C; 
-
-int prod [R][C]; 
-int size = a.size();
-for (int m = 0; m < size; m++){
-    for (int n = 0; n<size;n++){
-        int summa = 0;
-        for(int o = 0; o<size;o++){
-            summa += (a[m][o] * k[o][n]);
-        }
-        prod [m][n]= summa;
-    }
-}
+    return a * k; 
 }
 
-friend matrix3d<T> operator*(T k, const matrix3d& a) { return a * k; }
+friend matrix3d<T> operator*(T k, const matrix3d& a) { 
+//implement code here    
+    return k * a; 
+}
 friend matrix3d operator/(const matrix3d& a, T k) {
 // implement code here
-    size_t R;
-    size_t S; 
-
-
-    //multiply the inverse
-    int prod [R][S]; 
-    int size = a.size();
-    for (int m = 0; m < size; m++){
-        for (int n = 0; n<size;n++){
-            int summa = 0;
-            for(int o = 0; o<size;o++){
-                summa += (a[m][o] * k[o][n]);
-            }
-            prod [m][n]= summa;
-        }
-    }
+   return a / k;
 }
 //=======================================================================
 friend matrix3d operator*(const matrix3d& m, const vector3d<T>& v) {
 // implement code here
-    size_t R;
-    size_t C; 
-    int prod [R][C]; 
     int size =  m.size();
 
-    for (int m = 0; m < size; m++){
+    for (int mv = 0; mv < size; mv++){
         for (int n = 0; n<size;n++){
             int summa = 0;
             for(int o = 0; o<size;o++){
-                summa += (m[m] * v[o][n]);
+                summa += (m[mv] * v[o][n]);
             }
-            prod [m][n]= summa;
         }
     }
 
 }
 friend matrix3d operator*(const vector3d<T>& v, const matrix3d& m) {
 // implement code here
-    size_t R;
-    size_t C; 
 
-    int prod [R][C]; 
     int size = v.size();
-    for (int m = 0; m < size; m++){
+
+    for (int vm = 0; vm < size; vm++){
         for (int n = 0; n<size;n++){
             int summa = 0;
             for(int o = 0; o<size;o++){
-                summa += (v[m][o] * m[o]);
+                summa += (m[vm] * v[o][n]);
             }
-            prod [m][n]= summa;
         }
     }
 }
@@ -236,15 +204,37 @@ name_ = std::to_string(k) + "+" + name_;
 for (int i = 0; i < 4; ++i) { a[i] += k; }
 return *this;
 }
-template <typename T> matrix3d<T>& matrix3d<T>::operator-=(T k) { *this += -k; return *this; }
+template <typename T> matrix3d<T>& matrix3d<T>::operator-=(T k) { 
+//implement code here 
+   const matrix3d<T>& a = *this;
+    name_ = std::to_string(k) + "+" + name_;
+    for (int s = 0; s<4; ++s){
+        a[s] -= k;
+    }
+    return *this; 
+}
 template <typename T> matrix3d<T>& matrix3d<T>::operator*=(T k) {
 // implement code here
-    *this *= k;
+    const matrix3d<T>& a = *this;
+    name_ = std::to_string(k) + "+" + name_;
+    check_bounds(a.size());
+
+    for (int mu = 0; mu<4;++mu){
+        k[mu] *= a[mu]; 
+    }
     return *this;
 }
 template <typename T> matrix3d<T>& matrix3d<T>::operator/=(T k) {
 // implement code here
-    *this /= k;
+    const matrix3d<T>& a = *this;
+    name_ = std::to_string(k) + "+" + name_;
+    check_bounds(a.size());
+
+    for (int mu = 0; mu<4;++mu){
+        k[mu] *= transpose(a[mu]); 
+    }
+   
+    
     return *this;
 }
 //=================================================================================================

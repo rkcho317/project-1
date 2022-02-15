@@ -57,10 +57,14 @@ friend vector3d operator*(T k, const vector3d& v) {
 return vector3d<T>(std::to_string(k) + v.name_, v.dims_, { k * v[0], k * v[1], k * v[2], 0 });
 }
 
-friend vector3d operator*(const vector3d& v, T k) { return v * k; }
+friend vector3d operator*(const vector3d& v, T k) {
+     return vector3d<T>(std::to_string(k) + v.name_, v.dims_, { k * v[0], k * v[1], k * v[2], 0 });
+ }
 friend vector3d operator/(const vector3d& v, T k) {
 // implement code here
-return v/k;
+if (k == 0) { throw new std::invalid_argument("divide by zero"); }
+    double kinv = 1.0 / k;
+    return kinv * v;
 }
 //-----------------------------------------------------------------------
 bool operator==(const vector3d<T>& v) const;

@@ -74,31 +74,13 @@ friend matrix3d operator/(const matrix3d& a, T k) {
 //=======================================================================
 friend matrix3d operator*(const matrix3d& m, const vector3d<T>& v) {
 // implement code here
-    int size =  m.size();
-
-    for (int mv = 0; mv < size; mv++){
-        for (int n = 0; n<size;n++){
-            int summa = 0;
-            for(int o = 0; o<size;o++){
-                summa += (m[mv] * v[o][n]);
-            }
-        }
-    }
+    return m * v;
 
 }
 friend matrix3d operator*(const vector3d<T>& v, const matrix3d& m) {
 // implement code here
 
-    int size = v.size();
-
-    for (int vm = 0; vm < size; vm++){
-        for (int n = 0; n<size;n++){
-            int summa = 0;
-            for(int o = 0; o<size;o++){
-                summa += (m[vm] * v[o][n]);
-            }
-        }
-    }
+    return v * m;
 }
 matrix3d<T> operator*(const matrix3d<T>& b);
 //=======================================================================
@@ -181,18 +163,17 @@ check_bounds(i); return cols_[i];
 }
 template <typename T> T matrix3d<T>::operator()(int row, int col) const {
 // implement code here
-    operator[];
+    
     return cols_[row][col];
 }
 template <typename T> T& matrix3d<T>::operator()(int row, int col) {
 // implement code here
-    operator[];
+    
     return cols_[row][col];
 }
 template <typename T> T* matrix3d<T>::opengl_memory(int row, int col) { // constant ptr
 // implement code here
-    int i;
-    check_bounds(i); 
+   
     *this = cols_[row][col];
     return *this;
 }
@@ -287,26 +268,24 @@ template <typename T> matrix3d<T> matrix3d<T>::transpose() const {
 const matrix3d<T>& m = *this;
 // implement code here
 
-int rows, col; 
-matrix3d<T> trans_m(rows,col); 
-
-for (unsigned int t = 0; t< rows; t++){
-    for(unsigned int r=0; r< col; r++){
-        trans_m(r,t) = operator()(t,r);
+for (unsigned int t = 0; t< 3; t++){
+    for(unsigned int r=0; r< 3; r++){
+        m[r][t] = m[t][r];
     }
 }
+return *this;
 }
 template <typename T> T matrix3d<T>::determinant() const {
 // implement code here
 const matrix3d<T>& m = *this;
- int row1;
- int row2;
- int dete; 
+int row1 = m[0][2]*m[1][1]*m[2][0];
+int row2 = m[0][1]*m[1][2]*m[2][0];
+int row3 = m[0][2]*m[1][0]*m[2][1];
+int row4 = m[0][0]*m[1][2]*m[2][1];
+int row5 = m[0][1]*m[1][0]*m[2][2];
+int row6 = m[0][0]*m[1][1]*m[2][2];
 
- row1 = m[1][1] * m[2][2];
- row2 = m[1][2] * m[2][2];
-
- dete = 1 / (row1-row2);
+int dete = -row1+row2+row3+-row4+row5+row6;
 return dete;
 }
 
@@ -341,9 +320,11 @@ return matrix3d<T>("Min(" + name_ + ")", 3, {
 
 template <typename T> matrix3d<T> matrix3d<T>::cofactor() const {
 // implement code here
+    const matrix3d<T>& m = *this;
+    int i,j;
    // -1 ^ (i+j) * minors.()(i,j)
-   int i, j;
-   -1^(i,j) * minors()(i,j); 
+    pow(-1,(i+j)) * minors();
+   return  *this;
 }
 template <typename T> matrix3d<T> matrix3d<T>::adjugate() const {
 // implement code here
@@ -357,15 +338,17 @@ template <typename T> matrix3d<T> matrix3d<T>::inverse() const {
 //=================================================================================================
 template <typename T> matrix3d<T> matrix3d<T>::identity(int dims) {
 // implement code here
-  double identity_matrix[dims][dims] = {0.0};
+
+  int identity_matrix[dims][dims] = {0};
 
     for (unsigned int id = 0; id<dims;id++){
         for(unsigned int en = 0;en<dims;en++){
-        if (id == en){
-            identity_matrix[id][en] = 1.0 ;
+            if (id == en){
+                identity_matrix[id][en] = 1 ;
+            }
         }
     }
-    }
+
 return identity_matrix;
 }
 

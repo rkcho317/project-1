@@ -290,8 +290,12 @@ template <typename T> T matrix3d<T>::determinant() const {
 // implement code here
 const matrix3d<T>& m = *this;
 
-int dete = -m[0][2]*m[1][1]*m[2][0] + m[0][1]*m[1][2]*m[2][0] + m[0][2]*m[1][0]*m[2][1]
-            -m[0][0]*m[1][2]*m[2][1] -m[0][1]*m[1][0]*m[2][2] + m[0][0]*m[1][1]*m[2][2];
+int x,y,z;
+x = m[1][1]*m[2][2] - m[2][1]*m[1][2];
+y = m[1][0]*m[2][2] - m[2][0]*m[1][2];
+z = m[1][0]*m[2][1] - m[2][0]*m[1][1];
+
+int dete = (m[0][0] * x)-(m[0][1]*y)+(m[0][2]*z);
 return dete;
 }
 
@@ -326,7 +330,7 @@ return matrix3d<T>("Min(" + name_ + ")", 3, {
 
 template <typename T> matrix3d<T> matrix3d<T>::cofactor() const {
 // implement code here
-   // -1 ^ (i+j) * minors.()(i,j)
+   // -1 ^ (i+j) * minors()(i,j)
     int i = 0, j = 0;
     pow(-1,(i+j)) * minors()(i,j);
    return  *this;
@@ -338,7 +342,7 @@ template <typename T> matrix3d<T> matrix3d<T>::adjugate() const {
 template <typename T> matrix3d<T> matrix3d<T>::inverse() const {
 // implement code here
     
-    return adjugate()/determinant();
+    return adjugate() / determinant();
 }
 //=================================================================================================
 template <typename T> matrix3d<T> matrix3d<T>::identity(int dims) {

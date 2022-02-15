@@ -54,9 +54,11 @@ return k - v;
 }
 friend vector3d operator*(T k, const vector3d& v) {
 // implement code here
-return k * v;
+
+return (k * v); 
 }
-friend vector3d operator*(const vector3d& v, T k) { return k * v; }
+
+friend vector3d operator*(const vector3d& v, T k) { return v * k; }
 friend vector3d operator/(const vector3d& v, T k) {
 // implement code here
 return v/k;

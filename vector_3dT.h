@@ -50,7 +50,8 @@ friend vector3d operator+(const vector3d& v, T k) { return k + v; }
 friend vector3d operator-(const vector3d& v, T k) { return -k + v; }
 friend vector3d operator-(T k, const vector3d& v) {
 // implement code here
-return k - v;
+return vector3d(std::to_string(k) + "+" + v.name_, v.dims_,
+{ k - v[0], k - v[1], k - v[2], 0 });
 }
 friend vector3d operator*(T k, const vector3d& v) {
 // implement code here

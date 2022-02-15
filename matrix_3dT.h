@@ -332,7 +332,7 @@ return matrix3d<T>("Min(" + name_ + ")", 3, {
 template <typename T> matrix3d<T> matrix3d<T>::cofactor() const {
 // implement code here
    // -1 ^ (i+j) * minors.()(i,j)
-    int i, j;
+    int i = 0, j = 0;
     pow(-1,(i+j)) * minors()(i,j);
    return  *this;
 }

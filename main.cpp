@@ -55,7 +55,7 @@ assert(3.0 * u == u * 3.0);
 assert((u - 3.0) == -(3.0 - u));
 assert((5.0 * u) / 5.0 == u);
 assert(u + vector3dD::zero() == u);
-assert(i.dot(j) == j.dot(k) == k.dot(i) == 0);
+assert((i.dot(j) == j.dot(k)) == (k.dot(i) == 0));
 assert(i.cross(j) == k);
 assert(j.cross(k) == i);
 assert(k.cross(i) == j);

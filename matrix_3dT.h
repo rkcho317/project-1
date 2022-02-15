@@ -320,8 +320,8 @@ return matrix3d<T>("Min(" + name_ + ")", 3, {
 
 template <typename T> matrix3d<T> matrix3d<T>::cofactor() const {
 // implement code here
-    const matrix3d<T>& m = *this;
-    int i,j;
+    //const matrix3d<T>& m = *this;
+    int i = 0, j = 0;
    // -1 ^ (i+j) * minors.()(i,j)
     pow(-1,(i+j)) * minors();
    return  *this;
@@ -340,8 +340,8 @@ template <typename T> matrix3d<T> matrix3d<T>::identity(int dims) {
 // implement code here
   matrix3d<T> identity_matrix ;
 
-    for (unsigned int id = 0; id<dims;id++){
-        for(unsigned int en = 0;en<dims;en++){
+    for (int id = 0; id<dims;id++){
+        for(int en = 0;en<dims;en++){
             if (id == en){
                 identity_matrix[id][en] = 1 ;
             }

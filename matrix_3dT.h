@@ -375,13 +375,7 @@ check_bounds(dims);
 template <typename T> bool matrix3d<T>::operator==(const matrix3d<T>& b) const {
 check_equal_dims(b);
 const matrix3d<T>& a = *this;
-  T error = T();
-  for (int i = 0; i < dims_; ++i) {
-    for (int j = 0; j < dims_; ++j) {
-      error += abs((double)(a(i, j) - b(i, j)));
-    }
-  }
-  return error < epsilon;
+return a[0] == b[0] && a[1] == b[1] && a[2] == b[2];
 }
 
 template <typename T> bool matrix3d<T>::operator!=(const matrix3d<T>& b) const {

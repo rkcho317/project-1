@@ -289,14 +289,9 @@ return *this;
 template <typename T> T matrix3d<T>::determinant() const {
 // implement code here
 const matrix3d<T>& m = *this;
-int row1 = m[0][2]*m[1][1]*m[2][0];
-int row2 = m[0][1]*m[1][2]*m[2][0];
-int row3 = m[0][2]*m[1][0]*m[2][1];
-int row4 = m[0][0]*m[1][2]*m[2][1];
-int row5 = m[0][1]*m[1][0]*m[2][2];
-int row6 = m[0][0]*m[1][1]*m[2][2];
 
-int dete = -row1+row2+row3-row4-row5+row6;
+int dete = -m[0][2]*m[1][1]*m[2][0] + m[0][1]*m[1][2]*m[2][0] + m[0][2]*m[1][0]*m[2][1]
+            -m[0][0]*m[1][2]*m[2][1] -m[0][1]*m[1][0]*m[2][2] + m[0][0]*m[1][1]*m[2][2];
 return dete;
 }
 

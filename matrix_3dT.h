@@ -332,13 +332,13 @@ return matrix3d<T>("Min(" + name_ + ")", 3, {
 template <typename T> matrix3d<T> matrix3d<T>::cofactor() const {
 // implement code here
    // -1 ^ (i+j) * minors.()(i,j)
-    int i = 0, j = 0;
+    int i, j;
     pow(-1,(i+j)) * minors()(i,j);
    return  *this;
 }
 template <typename T> matrix3d<T> matrix3d<T>::adjugate() const {
 // implement code here
-    return transpose().cofactor();
+    return cofactor().transpose();
 }
 template <typename T> matrix3d<T> matrix3d<T>::inverse() const {
 // implement code here

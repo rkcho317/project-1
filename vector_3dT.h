@@ -133,9 +133,7 @@ return *this;
 }
 template <typename T> vector3d<T>& vector3d<T>::operator-=(const vector3d<T>& v) {
 // implement code here
-vector3d<T>& u = *this;
-for(int i = 0;i<3;++i){ u[i] -= v[i];}
-return *this;
+ return vector3d("-" + name_, dims_, { -data_[0], -data_[1], -data_[2], 0 });
 }
 //-----------------------------------------------------------------------
 template <typename T> vector3d<T>& vector3d<T>::operator+=(T k) {

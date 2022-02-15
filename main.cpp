@@ -46,7 +46,6 @@ show_vect(j);
 show_vect(k);
 show_vect(w);
 assert(u == u);
-print("break 1");
 assert(u != v);
 assert(u + v == v + u);
 assert(u - v == -(v - u));

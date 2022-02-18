@@ -14,7 +14,7 @@ typedef vector3d<double> vector3dD;
 typedef vector3d<float> vector3dF;
 typedef vector3d<int> vector3dI;
 typedef vector3d<long> vector3dL;
-typedef vector3D vec3;
+typedef vector3D<long> vec3;
 
 template <typename T>
 class vector3d {

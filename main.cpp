@@ -1,3 +1,6 @@
+//Rosa Cho, 888244357
+//Stephen Merwin, 887500593
+
 //============================================================
 // file: main.cpp
 //============================================================
@@ -7,8 +10,8 @@
 #include <cassert>
 
 //MATRIX and VECTOR classes assignment
-#include "vector3d_T.h"
-#include "matrix3d_T.h"
+#include "vector_3dT.h"
+#include "matrix_3dT.h"
 
 
 template <typename T>
@@ -27,9 +30,9 @@ void test_vectors() {
   std::cout << u << "\n";
   u.zero();
   show_vect(u);
-  vector3D v("v", 3, {8, 16, 32});
-  vector3D i("i", 3, {1, 0, 0}), j("j", 3, {0, 1, 0}), k("k", 3, {0, 0, 1});
-  vector3D w(3 * i + 4 * j - 2 * k);
+  vector3d v("v", 3, {8, 16, 32});
+  vector3d i("i", 3, {1, 0, 0}), j("j", 3, {0, 1, 0}), k("k", 3, {0, 0, 1});
+  vector3d w(3 * i + 4 * j - 2 * k);
 
   show_vect(u);
   show_vect(v);
@@ -149,13 +152,13 @@ void test_matrices() {
 
 void test_matrices_and_vectors() {
   print("\n====================  TESTING MATRICES and VECTORS  ========================");
-  vector3D p("p", 2, {1, 2});
+  vector3d p("p", 2, {1, 2});
   matrix3dD m("m", 2, {1, 2,   3, 4});
   show_vect(p);
   show_mat(m);
   assert(p * m == m * p);
 
-  vector3D q("q", 3, {1, 2, 3});
+  vector3d q("q", 3, {1, 2, 3});
   matrix3dD n("n", 3, {1, 2, 3,   4, 5, 6,   7, 8, 9});
   show_vect(q);
   show_mat(n);

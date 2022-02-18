@@ -14,7 +14,7 @@ typedef vector3d<double> vector3dD;
 typedef vector3d<float> vector3dF;
 typedef vector3d<int> vector3dI;
 typedef vector3d<long> vector3dL;
-
+typedef vector3D vec3;
 
 template <typename T>
 class vector3d {
@@ -27,8 +27,19 @@ vector3d(const std::string& name, int dims, const std::initializer_list<T>& li);
 T operator[](int i) const;
 T& operator[](int i);
 //-----------------------------------------------------------------------
-void name(const std::string& name);
-const std::string& name() const;
+
+  std::string name() const;
+  void name(const std::string& name);
+
+  double x() const { return data_[0]; }
+  double y() const  { return data_[1]; }
+  double z() const  { return data_[2]; }
+
+  double& x() { return data_[0]; }
+  double& y() { return data_[1]; }
+  double& z() { return data_[2]; }
+
+//---------------------------------------
 //-----------------------------------------------------------------------
 vector3d<T>& operator+=(const vector3d<T>& v);
 vector3d<T>& operator-=(const vector3d<T>& v);
@@ -42,17 +53,33 @@ vector3d<T> operator-();
 vector3d<T> operator+(const vector3d<T>& v);
 vector3d<T> operator-(const vector3d<T>& v);
 //-----------------------------------------------------------------------
-friend vector3d operator+(T k, const vector3d& v) {
-return vector3d(std::to_string(k) + "+" + v.name_, v.dims_,
-{ k + v[0], k + v[1], k + v[2], 0 });
-}
+  friend vector3d<T> operator+(const vector3d<T>& u, const vector3d<T>& v) {
+    check_equal_dims(u, v);
+    return vector3d<T>(u.name_ + "+" + v.name_, u.dims_,
+                    { u[0] + v[0], u[1] + v[1], u[2] + v[2], 0} );
+  }  
+
+
+  friend vector3d<T> operator-(const vector3d<T>& u, const vector3d<T>& v) { 
+  /* TODO */ 
+	check_equal_dims(u,v);
+     return vector3d(std::to_string(k) + "+" + v.name_, v.dims_,
+    { k - v[0], k - v[1], k - v[2], 0 });
+  }
+  
 friend vector3d operator+(const vector3d& v, T k) { 
     return k + v; 
     }
-friend vector3d operator-(const vector3d& v, T k) {
+	
+	  friend vector3d<T> operator+(T k, const vector3d<T>& v) {
+    return vector3d<T>(std::to_string(k) + "+" + v.name_, v.dims_, { k + v[0], k + v[1], k + v[2], 0 });
+  }
+  
+/* friend vector3d operator-(const vector3d& v, T k) {
      return vector3d(std::to_string(k) + "+" + v.name_, v.dims_,
     { k - v[0], k - v[1], k - v[2], 0 });
-     }
+     } */
+	 
 friend vector3d operator-(T k, const vector3d& v) {
 // implement code here
 

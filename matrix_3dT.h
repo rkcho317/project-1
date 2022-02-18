@@ -278,14 +278,15 @@ a(2,0)*b(0,2) + a(2,1)*b(1,2) + a(2,2)*b(2,2)} );
 template <typename T> matrix3d<T> matrix3d<T>::transpose() const {
 const matrix3d<T>& m = *this;
 // implement code here
-
-for (unsigned int t = 0; t< 3; t++){
-    for(unsigned int r=0; r< 3; r++){
-        m[r][t] = m[t][r];
+ matrix3d<T> trans_m;
+    for (int t=0; t< 3; t++){
+        for(int r=0; r< 3; r++){
+            trans_m[r][t] = m[t][r];
+        }
     }
+return trans_m;
 }
-return *this;
-}
+
 template <typename T> T matrix3d<T>::determinant() const {
 // implement code here
 const matrix3d<T>& m = *this;
@@ -330,10 +331,18 @@ return matrix3d<T>("Min(" + name_ + ")", 3, {
 
 template <typename T> matrix3d<T> matrix3d<T>::cofactor() const {
 // implement code here
-   // -1 ^ (i+j) * minors()(i,j)
-    int i = 0, j = 0;
-    pow(-1,(i+j)) * minors()(i,j);
-   return  *this;
+   const matrix3d<T>& m = *this;
+   matrix3d<T>cm;
+    // -1 ^ (i+j) * minors.()(i,j)
+    //int i, j;
+    for(int i = 0;i<3;i++){
+        for(int j=0;j<3;j++){
+        m[i][j] = pow(-1,(i+j)) * minors()(i,j);
+        cm[i][j] = m[i][j];
+        }
+    }
+
+   return cm;
 }
 template <typename T> matrix3d<T> matrix3d<T>::adjugate() const {
 // implement code here

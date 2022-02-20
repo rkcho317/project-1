@@ -3,7 +3,10 @@
 #ifndef __matrix3d_T_H__
 #define __matrix3d_T_H__
 
+#include <iostream>
+#include <iomanip>
 #include <cstring>
+#include <cmath>
 #include "vector_3dT.h"
 
 template <typename T> class matrix3d;
@@ -12,6 +15,9 @@ typedef matrix3d<double> matrix3dD;
 typedef matrix3d<float> matrix3dF;
 typedef matrix3d<int> matrix3dI;
 typedef matrix3d<long> matrix3dL;
+
+double epsilon = 1e-10;
+
 template <typename T>
 class matrix3d {
 public:

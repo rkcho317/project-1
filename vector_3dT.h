@@ -14,7 +14,7 @@ typedef vector3d<double> vector3dD;
 typedef vector3d<float> vector3dF;
 typedef vector3d<int> vector3dI;
 typedef vector3d<long> vector3dL;
-typedef vector3D<long> vec3;
+typedef vector3d<long> vec3;
 
 template <typename T>
 class vector3d {
@@ -63,8 +63,8 @@ vector3d<T> operator-(const vector3d<T>& v);
   friend vector3d<T> operator-(const vector3d<T>& u, const vector3d<T>& v) { 
   /* TODO */ 
 	check_equal_dims(u,v);
-     return vector3d(std::to_string(k) + "+" + v.name_, v.dims_,
-    { k - v[0], k - v[1], k - v[2], 0 });
+     return vector3d(std::to_string(u) + "+" + v.name_, v.dims_,
+    { u - v[0], u - v[1], u - v[2], 0 });
   }
   
 friend vector3d operator+(const vector3d& v, T k) { 
@@ -125,20 +125,24 @@ T data_[4];
 //-----------------------------------------------------------------------
 template <typename T> vector3d<T>::vector3d() : vector3d("", 3) {} // 3d default dims
 template <typename T> vector3d<T>::vector3d(const std::string& name, int dims)
-: name_(name), dims_(dims) {
-std::memset(data_, 0, dims_ * sizeof(T));
-data_[3] = T(); // vectors have 0 at end, pts have 1
+  : name_(name), dims_(dims) {
+  std::memset(data_, 0, dims_ * sizeof(T));
+  data_[3] = T(); // vectors have 0 at end, pts have 1
 }
 template <typename T> vector3d<T>::vector3d(const std::string& name, int dims,
-const std::initializer_list<T>& li)
-: vector3d(name, dims) {
-int i = 0;
-for (T value : li) {
-if (i > dims_) { break; }
-data_[i++] = value;
+  const std::initializer_list<T>& li)
+  : vector3d(name, dims) {
+  int i = 0;
+  for (T value : li) {
+  if (i > dims_) { break; }
+  data_[i++] = value;
+  }
+  data_[3] = T();
 }
-data_[3] = T();
-}
+
+template <typename T> std::string vector3d<T>::name() const { return name_; }
+template <typename T> void vector3d<T>::name(const std::string& name) { name_ = name; }
+
 //-----------------------------------------------------------------------
 template <typename T> T vector3d<T>::operator[](int i) const { // read-only index operator
 check_bounds(i);
@@ -150,8 +154,6 @@ template <typename T> T& vector3d<T>::operator[](int i) { // read-write index op
     return data_[i] = data_[i-1] ;
 }
 //-----------------------------------------------------------------------
-template <typename T> void vector3d<T>::name(const std::string& name) { name_ = name; }
-template <typename T> const std::string& vector3d<T>::name() const { return name_; }
 //-----------------------------------------------------------------------
 template <typename T> vector3d<T>& vector3d<T>::operator+=(const vector3d<T>& v) {
 vector3d<T>& u = *this;

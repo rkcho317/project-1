@@ -95,7 +95,7 @@ print("transpose of a is: ");
 print(atrans);
 print("adjugate is: ");
 print(adju);
-//print(ainv);
+print(ainv);
 //print(binv);
 /*
 print(a * ainv);
@@ -107,7 +107,7 @@ assert(b * binv == binv * b);
 assert(a.transpose().transpose() == a);
 assert(a.transpose().determinant() == a.determinant());
 */
-print(a * ainv);
+
 assert(a + b == b + a);
 assert(a - b == -(b - a));
 assert(3.0 + a == a + 3.0);

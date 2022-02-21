@@ -215,19 +215,21 @@ template <typename T> matrix3d<T>& matrix3d<T>::operator-=(T k) {
 template <typename T> matrix3d<T>& matrix3d<T>::operator*=(T k) {
 // implement code here
     const matrix3d<T>& a = *this;
-    matrix3d<T> result;
+    matrix3d<T> res;
     name_ = std::to_string(k) + "+" + name_;
     check_bounds(a.size());
 
-    for (int mu = 0; mu<4;++mu){
-        for(int sic=0;mu<4;++sic){
-            result[mu][sic] = 0;
-            for(int ah=0;ah<4;++ah)
-            result[mu][ah] += k[mu][sic] * a[sic][ah];
+    for(int i=0;i<4;i++){
+        for(int j=0;j<4;j++){
+            for(int l;j<4;j++){
+                res[i,j] += a[i,l] * k[l][j];
+            }
         }
     }
-    return *this;
+
+    return res;
 }
+
 template <typename T> matrix3d<T>& matrix3d<T>::operator/=(T k) {
 // implement code here
     const matrix3d<T>& a = *this;
@@ -274,27 +276,30 @@ return matrix3d<T>(name_ + "+" + b.name_, dims_, {a[0] + -b[0], a[1] + -b[1], a[
 template <typename T> matrix3d<T> matrix3d<T>::operator*(const matrix3d<T>& b) {
 const matrix3d<T>& a = *this;
 return matrix3d<T>(a.name_ + "*" + b.name_, 3, {
-a(0,0)*b(0,0) + a(0,1)*b(1,0) + a(0,2)*b(2,0),
-a(1,0)*b(0,0) + a(1,1)*b(1,0) + a(1,2)*b(2,0),
-a(2,0)*b(0,0) + a(2,1)*b(1,0) + a(2,2)*b(2,0),
-a(0,0)*b(0,1) + a(0,1)*b(1,1) + a(0,2)*b(2,1),
-a(1,0)*b(0,1) + a(1,1)*b(1,1) + a(1,2)*b(2,1),
-a(2,0)*b(0,1) + a(2,1)*b(1,1) + a(2,2)*b(2,1),
-a(0,0)*b(0,2) + a(0,1)*b(1,2) + a(0,2)*b(2,2),
-a(1,0)*b(0,2) + a(1,1)*b(1,2) + a(1,2)*b(2,2),
-a(2,0)*b(0,2) + a(2,1)*b(1,2) + a(2,2)*b(2,2)} );
+
+    a(0,0)*b(0,0) + a(0,1)*b(1,0) + a(0,2)*b(2,0),
+    a(0,0)*b(0,1) + a(0,1)*b(1,1) + a(0,2)*b(1,2),
+    a(0,0)*b(0,2) + a(0,1)*b(1,2) + a(0,2)*b(2,2),
+    a(1,0)*b(0,0) + a(1,1)*b(1,0) + a(1,2)*b(2,0),
+    a(1,0)*b(0,1) + a(1,1)*b(1,1) + a(1,2)*b(1,2),
+    a(1,0)*b(0,2) + a(1,1)*b(1,2) + a(1,2)*b(2,2),
+    a(2,0)*b(0,0) + a(2,1)*b(1,0) + a(2,2)*b(2,0),
+    a(2,0)*b(0,1) + a(2,1)*b(1,1) + a(2,2)*b(1,2),
+    a(2,0)*b(0,2) + a(2,1)*b(1,2) + a(2,2)*b(2,2)
+    });
 }
 //=================================================================================================
 template <typename T> matrix3d<T> matrix3d<T>::transpose() const {
-const matrix3d<T>& m = *this;
+const matrix3d<T>& a = *this;
 // implement code here
  matrix3d<T> trans_m;
-    for (int t=0; t< 4; t++){
+     for (int t=0; t< 4; t++){
         for(int r=0; r< 4; r++){
-            trans_m[r][t] = m[t][r];
+            trans_m[r][t] = a[t][r];
         }
-    }
-return trans_m;
+    }  
+    
+    return trans_m;
 }
 
 template <typename T> T matrix3d<T>::determinant() const {
@@ -345,8 +350,8 @@ template <typename T> matrix3d<T> matrix3d<T>::cofactor() const {
    matrix3d<T>cm;
     // -1 ^ (i+j) * minors.()(i,j)
     //int i, j;
-    for(int i = 0;i<3;i++){
-        for(int j=0;j<3;j++){
+    for(int i = 0;i<4;i++){
+        for(int j=0;j<4;j++){
         m[i][j] = pow(-1,(i+j)) * minors()(i,j);
         cm[i][j] = m[i][j];
         }

@@ -57,9 +57,9 @@ return matrix3d(std::to_string(k) + "+" + a.name(), 3,
 }
 
 friend matrix3d operator+(T k, const matrix3d& a) { 
-    return matrix3d(std::to_string(k) + "+" + a.name(), 3,
-    { a[0] + k, a[1] + k, a[2] + k});
+    return  a + k;
     }
+
 friend matrix3d operator-(const matrix3d& a, T k) { 
     return matrix3d(std::to_string(k) + "+" + a.name(), 3,
     { a[0] + -k, a[1] + -k, a[2] + -k});
@@ -67,8 +67,7 @@ friend matrix3d operator-(const matrix3d& a, T k) {
 
 friend matrix3d operator-(T k, const matrix3d& a) {
 // implement code here
-    return matrix3d(std::to_string(k) + "+" + a.name(), 3,
-    { a[0] + -k, a[1] + -k, a[2] + -k});
+    return  a - k;
 }
 
 friend matrix3d operator*(const matrix3d& a, T k) {
@@ -79,8 +78,7 @@ friend matrix3d operator*(const matrix3d& a, T k) {
 
 friend matrix3d<T> operator*(T k, const matrix3d& a) { 
 //implement code here    
-     return matrix3d(std::to_string(k) + "+" + a.name(), 3,
-    { a[0] * k, a[1] * k, a[2] * k}); 
+     return a * k;
 }
 friend matrix3d operator/(const matrix3d& a, T k) {
 // implement code here
@@ -155,18 +153,19 @@ cols_[i/3][i % 3] = value;
 }
 //=================================================================================================
 template <typename T> matrix3d<T>& matrix3d<T>::operator=(T array[9]) {
-for (int i = 0; i < 3; ++i) {
-for (int j = 0; j < 3; ++i) {
-cols_[i][j] = array[i + j];
-}
-}
+    for (int i = 0; i < 3; ++i) {
+        for (int j = 0; j < 3; ++i) {
+        cols_[i][j] = array[i + j];
+        }
+    }
 return *this;
 }
+
 template <typename T> matrix3d<T>& matrix3d<T>::operator=(T k) {
-for (int i = 0; i < 3; ++i) {
-for (int j = 0; j < 3; ++j) {
-cols_[i][j] = k;
-}
+    for (int i = 0; i < 3; ++i) {
+        for (int j = 0; j < 3; ++j) {
+        cols_[i][j] = k;
+    }
 }
 return *this;
 }
@@ -220,9 +219,10 @@ template <typename T> matrix3d<T>& matrix3d<T>::operator*=(T k) {
     name_ = std::to_string(k) + "+" + name_;
     check_bounds(a.size());
 
-    for (int mu = 0; mu<3;++mu){
-        for(int sic=0;mu<3;++sic){
-            for(int ah=0;ah<3;++ah)
+    for (int mu = 0; mu<4;++mu){
+        for(int sic=0;mu<4;++sic){
+            result[mu][sic] = 0;
+            for(int ah=0;ah<4;++ah)
             result[mu][ah] += k[mu][sic] * a[sic][ah];
         }
     }

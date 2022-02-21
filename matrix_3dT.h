@@ -88,9 +88,15 @@ friend matrix3d operator/(const matrix3d& a, T k) {
 //=======================================================================
 friend matrix3d operator*(const matrix3d& m, const vector3d<T>& v) {
 // implement code here
-
-    return m * v;
-
+    matrix3d<T> res;    
+    /*  
+     for(int i=0;i<4;i++){
+         for(int j=0;j<4;j++){
+             res[i] += m[i][j] * v[j];
+         }
+     } */
+     
+    return res;
 }
 friend matrix3d operator*(const vector3d<T>& v, const matrix3d& m) {
 // implement code here
@@ -290,29 +296,36 @@ return matrix3d<T>(a.name_ + "*" + b.name_, 3, {
 }
 //=================================================================================================
 template <typename T> matrix3d<T> matrix3d<T>::transpose() const {
-const matrix3d<T>& a = *this;
+const matrix3d<T>& tr = *this;
+double trans_m;
 // implement code here
- matrix3d<T> trans_m;
-     for (int t=0; t< 4; t++){
-        for(int r=0; r< 4; r++){
-            trans_m[r][t] = a[t][r];
-        }
-    }  
-    
-    return trans_m;
+         for (int t=0; t<3; t++){
+            for(int r=0; r<t; r++){ 
+                trans_m = tr[t][r];
+                tr[t][r] = tr[r][t];
+                tr[r][t] = trans_m;
+            }
+
+        }    
+       return tr;
 }
 
 template <typename T> T matrix3d<T>::determinant() const {
 // implement code here
 const matrix3d<T>& m = *this;
 
-int x,y,z;
+/* double x,y,z;
 x = m[1][1]*m[2][2] - m[2][1]*m[1][2];
 y = m[1][0]*m[2][2] - m[2][0]*m[1][2];
-z = m[1][0]*m[2][1] - m[2][0]*m[1][1];
+z = m[1][0]*m[2][1] - m[2][0]*m[1][1]; */
 
-int dete = (m[0][0] * x)-(m[0][1]*y)+(m[0][2]*z);
-return dete;
+ 
+
+return (
+      (m[0][0] * ( m[1][1]*m[2][2] - m[2][1]*m[1][2]))
+      -(m[0][1]*(m[1][0]*m[2][2] - m[2][0]*m[1][2]))
+     +(m[0][2]*(m[1][0]*m[2][1] - m[2][0]*m[1][1]))
+    );
 }
 
 template <typename T> T matrix3d<T>::trace() const {
@@ -347,17 +360,16 @@ return matrix3d<T>("Min(" + name_ + ")", 3, {
 template <typename T> matrix3d<T> matrix3d<T>::cofactor() const {
 // implement code here
    const matrix3d<T>& m = *this;
-   matrix3d<T>cm;
+   //matrix3d<T>cm;
     // -1 ^ (i+j) * minors.()(i,j)
-    //int i, j;
     for(int i = 0;i<4;i++){
         for(int j=0;j<4;j++){
         m[i][j] = pow(-1,(i+j)) * minors()(i,j);
-        cm[i][j] = m[i][j];
+        //cm[i][j] = m[i][j];
         }
     }
 
-   return cm;
+   return *this;
 }
 template <typename T> matrix3d<T> matrix3d<T>::adjugate() const {
 // implement code here
@@ -365,8 +377,8 @@ template <typename T> matrix3d<T> matrix3d<T>::adjugate() const {
 }
 template <typename T> matrix3d<T> matrix3d<T>::inverse() const {
 // implement code here
-    
-    return adjugate() / determinant();
+    double dete = determinant();
+    return adjugate() / dete;
 }
 //=================================================================================================
 template <typename T> matrix3d<T> matrix3d<T>::identity(int dims) {

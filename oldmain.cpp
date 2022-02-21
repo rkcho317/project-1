@@ -82,7 +82,7 @@ matrix3dD a("a", 3, {3, 2, 0, 0, 0, 1, 2, -2, 1});
 matrix3dD b("b", 3, {1, 0, 5, 2, 1, 6, 3, 4, 0});
 matrix3dD ainv = a.inverse();
 matrix3dD binv = b.inverse();
-int a_det = a.determinant();
+double a_det = a.determinant();
 matrix3dD acof = a.cofactor();
 matrix3dD adju = a.adjugate();
 matrix3dD atrans = a.transpose();
@@ -95,6 +95,9 @@ print("transpose of a is: ");
 print(atrans);
 print("adjugate is: ");
 print(adju);
+print("determinant is: ");
+print (a_det);
+print("inverse is: ");
 print(ainv);
 //print(binv);
 /*
@@ -116,7 +119,7 @@ assert((a + 3.0) - 3.0 == a);
 assert((3.0 * a) / 3.0 == a);
 assert(-(-a) == a);
 matrix3dD zerod("zerod", 3, {1, 2, 3, 4, 5, 6, 7, 8, 9});
-//assert(zerod.determinant() == 0);
+assert(zerod.determinant() == 0);
 print("...test matrices assertions passed");
 //*/
 print("==================== FINISHED testing matrices ========================");

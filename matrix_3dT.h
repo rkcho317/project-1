@@ -75,7 +75,6 @@ friend matrix3d operator*(const matrix3d& a, T k) {
 // implement code here
     return matrix3d(std::to_string(k) + "+" + a.name(), 3,
     { a[0] * k, a[1] * k, a[2] * k});
-
 }
 
 friend matrix3d<T> operator*(T k, const matrix3d& a) { 
@@ -91,6 +90,7 @@ friend matrix3d operator/(const matrix3d& a, T k) {
 //=======================================================================
 friend matrix3d operator*(const matrix3d& m, const vector3d<T>& v) {
 // implement code here
+
     return m * v;
 
 }
@@ -216,11 +216,15 @@ template <typename T> matrix3d<T>& matrix3d<T>::operator-=(T k) {
 template <typename T> matrix3d<T>& matrix3d<T>::operator*=(T k) {
 // implement code here
     const matrix3d<T>& a = *this;
+    matrix3d<T> result;
     name_ = std::to_string(k) + "+" + name_;
     check_bounds(a.size());
 
-    for (int mu = 0; mu<4;++mu){
-        k[mu] *= a[mu]; 
+    for (int mu = 0; mu<3;++mu){
+        for(int sic=0;mu<3;++sic){
+            for(int ah=0;ah<3;++ah)
+            result[mu][ah] += k[mu][sic] * a[sic][ah];
+        }
     }
     return *this;
 }

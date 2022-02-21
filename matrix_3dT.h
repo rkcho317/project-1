@@ -62,13 +62,13 @@ friend matrix3d operator+(T k, const matrix3d& a) {
     }
 friend matrix3d operator-(const matrix3d& a, T k) { 
     return matrix3d(std::to_string(k) + "+" + a.name(), 3,
-    { a[0] - k, a[1] - k, a[2] - k});
+    { a[0] + -k, a[1] + -k, a[2] + -k});
     }
 
 friend matrix3d operator-(T k, const matrix3d& a) {
 // implement code here
     return matrix3d(std::to_string(k) + "+" + a.name(), 3,
-    { a[0] - k, a[1] - k, a[2] - k});
+    { a[0] + -k, a[1] + -k, a[2] + -k});
 }
 
 friend matrix3d operator*(const matrix3d& a, T k) {

@@ -289,8 +289,8 @@ template <typename T> matrix3d<T> matrix3d<T>::transpose() const {
 const matrix3d<T>& m = *this;
 // implement code here
  matrix3d<T> trans_m;
-    for (int t=0; t< 3; t++){
-        for(int r=0; r< 3; r++){
+    for (int t=0; t< 4; t++){
+        for(int r=0; r< 4; r++){
             trans_m[r][t] = m[t][r];
         }
     }

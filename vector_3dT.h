@@ -192,6 +192,7 @@ return *this;
 //-----------------------------------------------------------------------
 template <typename T> vector3d<T> vector3d<T>::operator-() {
 return vector3d<T>("-" + name_, dims_, {-data_[0], -data_[1], -data_[2], 0});
+
 }
 
 template <typename T> vector3d<T> vector3d<T>::operator+(const vector3d& v) {

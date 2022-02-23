@@ -10,8 +10,8 @@
 #include <cassert>
 
 //MATRIX and VECTOR classes assignment
-#include "vector_3dT.h"
-#include "matrix_3dT.h"
+#include "vector3d_T.h"
+#include "matrix3d_T.h"
 
 #define _USE_MATH_DEFINES 
 #include <cmath>
@@ -35,8 +35,7 @@ void show_mat(T m) { std::cout << m.name() << " is: " << m << "\n"; }
 
 void test_vectors() {
   print("\n====================  TESTING VECTORS  ========================");
-  //vector3d<double> u("u", 3, {1,  2,  4});
-  vector3dD u("u", 3, {1, 2, 4});
+  vector3d<double> u("u", 3, {1,  2,  4});
     std::cout << u.name() << "\n";
     std::cout << u << "\n";
     u.zero();
@@ -62,12 +61,12 @@ void test_vectors() {
   
   assert(3.0 + u == u + 3.0);
   assert(3.0 * u == u * 3.0);
- // assert((u - 3.0) == -(3.0 - u));
+  assert((u - 3.0) == -(3.0 - u));
   assert((5.0 * u) / 5.0 == u);
 
   assert(u + vector3dD::zero() == u);
 
-  assert(i.dot(j) == j.dot(k) == k.dot(i) == 0);
+  assert((i.dot(j) == j.dot(k)) == (k.dot(i) == 0));
   
   assert(i.cross(j) == k);
   assert(j.cross(k) == i);
@@ -84,8 +83,7 @@ void test_vectors() {
   assert(j.angle(k) == M_PI_2);
   assert(k.angle(i) == M_PI_2);
   
-  //vector3D uhat = u / u.magnitude();
-  vector3dD uhat = u / u.magnitude(); // unit vector in u direction
+  vector3D uhat = u / u.magnitude(); // unit vector in u direction
   show_vect(u);
   show_vect(uhat);
   print(uhat.magnitude());
@@ -181,7 +179,7 @@ void test_matrices_and_vectors() {
 
 
 int main(int argc, const char * argv[]) {
- //test_vectors();
+ test_vectors();
  test_matrices();
  //test_matrices_and_vectors();
     

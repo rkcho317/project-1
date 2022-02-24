@@ -350,8 +350,7 @@ template <typename T> matrix3d<T> matrix3d<T>::adjugate() const {
 }
 template <typename T> matrix3d<T> matrix3d<T>::inverse() const {
 // implement code here
-    double dete = determinant();
-    return adjugate() / dete;
+    return adjugate() * (1/determinant()); 
 }
 //=================================================================================================
 template <typename T> matrix3d<T> matrix3d<T>::identity(int dims) {

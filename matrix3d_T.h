@@ -347,10 +347,13 @@ template <typename T> matrix3d<T> matrix3d<T>::cofactor() const {
 template <typename T> matrix3d<T> matrix3d<T>::adjugate() const {
 // implement code here
     return cofactor().transpose();
+
 }
 template <typename T> matrix3d<T> matrix3d<T>::inverse() const {
 // implement code here
-    return adjugate() * (1/determinant()); 
+    const double& dete = 1/determinant();
+    return dete * adjugate() ; 
+    
 }
 //=================================================================================================
 template <typename T> matrix3d<T> matrix3d<T>::identity(int dims) {
@@ -369,6 +372,7 @@ template <typename T> matrix3d<T> matrix3d<T>::identity(int dims) {
     }
 
 return identity_matrix;
+
 }
 
 template <typename T> matrix3d<T> matrix3d<T>::zero(int dims) {

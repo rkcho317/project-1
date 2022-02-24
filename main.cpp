@@ -127,21 +127,26 @@ void test_matrices() {
 
   show_mat(a.cofactor());
   show_mat(b.cofactor());
-
+  
+  print("A adjugate is: ");
   show_mat(a.adjugate());
+  print("B adjugate is: ");
   show_mat(b.adjugate());
 
-
+  print("A Inverse");
   show_mat(ainv);
+  print("B Inverse");
   show_mat(binv);
+  print("A * AInv");
   show_mat(a * ainv);
+  print("B * Binv");
   show_mat(b * binv);
   show_mat(matrix3dD::identity(3));
 
-  //assert(a * ainv == matrix3dD::identity(3));
-  //assert(a * ainv == ainv * a);
-  //assert(b * binv == matrix3dD::identity(3));
-  //assert(b * binv == binv * b);
+  assert(a * ainv == matrix3dD::identity(3));
+  assert(a * ainv == ainv * a);
+  assert(b * binv == matrix3dD::identity(3));
+  assert(b * binv == binv * b);
   assert(a.transpose().transpose() == a);
   assert(a.determinant() == a.transpose().determinant());
 

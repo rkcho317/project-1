@@ -80,7 +80,10 @@ public:
     }
     else return false;
   }
-  vector3d<T> vector() const{return vector3d("quat", 3, {this->x, this->y, this->z});}
+  vector3d<T> vector() const{
+    return vector3d<T>("quat", 3, {this->x, this->y, this->z});
+    }
+
   T scalar() const{return this->w;}
 
   quaternion unit_scalar() const{return quaternion(1.0, vector());}
@@ -126,7 +129,9 @@ public:
    quaternion q_star = quaternion(q.w, -1*q.x, -1*q.y, -1*q.z);
    quaternion p = quaternion(0, pt.x(), pt.y(), pt.z());
    quaternion p_rot = q * p *q_star;
-   return vector3d(p_rot.x, p_rot.y, p_rot.z);
+   return vector3d<T>("rotate",3,{p_rot.x, p_rot.y, p_rot.z});
+
+
  }
 
  friend std::ostream& operator<<(std::ostream& os, const quaternion& q) {
@@ -145,12 +150,12 @@ public:
    else { return os << q.w << q.vector() << ")"; }
  }
 
- static void run_tests();
+ //static void run_tests();
 
 private:
  T w, x, y, z;
 };
-
+/* 
 void plane_rotation(const std::string& msg, const quatD& plane, const std::initializer_list<double>& li) {
  matrix3dD rotate = matrix3dD("rot_matrix", 3, li);
  assert(plane.rot_matrix() == rotate);
@@ -260,7 +265,7 @@ void quaternion<T>::run_tests() {
  std::cout << "SEE THIS WEBSITE for DETAILED DIAGRAMS on the TESTS of the PLANE's rotations\n";
  std::cout << "https://www.euclideanspace.com/maths/geometry/rotations/conversions/quaternionToMatrix/examples/index.htm\n";
 }
+ */
 
-
-#endif quaternion_T_h 
+#endif 
 

@@ -262,5 +262,5 @@ void quaternion<T>::run_tests() {
 }
 
 
-#endif /* quaternion_T_h */
+#endif quaternion_T_h 
 

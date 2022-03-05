@@ -15,10 +15,9 @@ typedef quat<double> quatD;
 template <typename T>
 class quaternion {
 public:
-  //quaternion(T w_=T(), T x_=T(), T y_=T(), T z_=T())
-  //: w(w_), x(x_), y(y_), z(z_) { }
-  quaternion<T>();
-  quaternion<T> (T w, T x, T y,T z);
+  quaternion(T w_=T(), T x_=T(), T y_=T(), T z_=T())
+  : w(w_), x(x_), y(y_), z(z_) { }
+
 
   static quaternion i(){return quaternion(0.0, 1.0, 0.0, 0.0);}
   static quaternion j(){return quaternion(0.0, 0.0, 1.0, 0.0);}
@@ -152,12 +151,12 @@ public:
    else { return os << q.w << q.vector() << ")"; }
  }
 
- //static void run_tests();
+ static void run_tests();
 
 private:
  T w, x, y, z;
 };
-/* 
+
 void plane_rotation(const std::string& msg, const quatD& plane, const std::initializer_list<double>& li) {
  matrix3dD rotate = matrix3dD("rot_matrix", 3, li);
  assert(plane.rot_matrix() == rotate);
@@ -267,7 +266,7 @@ void quaternion<T>::run_tests() {
  std::cout << "SEE THIS WEBSITE for DETAILED DIAGRAMS on the TESTS of the PLANE's rotations\n";
  std::cout << "https://www.euclideanspace.com/maths/geometry/rotations/conversions/quaternionToMatrix/examples/index.htm\n";
 }
- */
+
 
 #endif 
 

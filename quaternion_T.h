@@ -15,8 +15,10 @@ typedef quat<double> quatD;
 template <typename T>
 class quaternion {
 public:
-  quaternion(T w_=T(), T x_=T(), T y_=T(), T z_=T())
-  : w(w_), x(x_), y(y_), z(z_) { }
+  //quaternion(T w_=T(), T x_=T(), T y_=T(), T z_=T())
+  //: w(w_), x(x_), y(y_), z(z_) { }
+  quaternion<T>();
+  quaternion<T> (<T>w, <T>,x, <T>y,<T>z);
 
   static quaternion i(){return quaternion(0.0, 1.0, 0.0, 0.0);}
   static quaternion j(){return quaternion(0.0, 0.0, 1.0, 0.0);}

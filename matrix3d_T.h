@@ -111,7 +111,7 @@ T trace() const;
 //=======================================================================
 matrix3d<T> minors() const; // see defn
 matrix3d<T> cofactor() const; // (-1)^(i+j)*minors()(i, j)
-matrix3d<T> adjugate() const; // cofactor.transpose()
+matrix3d<T> adjugate() const; // cofactor. ()
 matrix3d<T> inverse() const; // adjugate()/determinant()
 //=======================================================================
 static matrix3d<T> identity(int dims); // identity matrix

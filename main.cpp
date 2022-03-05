@@ -187,9 +187,8 @@ void test_matrices_and_vectors() {
 }
 
 void test_quarternion(){
-    run_tests();
-    print("...test_quarternion assertions passed");
-    print("====================  FINISHED testing quarternions  ========================");
+   void run_tests();
+
 
 }
 

@@ -215,7 +215,7 @@ void test_quarternion(){
     std::cout << "c == d is " << yes_or_no(c == d) << "\nc != d is " << yes_or_no(c != d);
     std::cout << "\ne == e is " << yes_or_no(e == e) << "\ne != e is " << yes_or_no(e != e) << "\n";
 
-    std::cout << "\n\nquat.ij is: " << quatD::ij() << "\nquat.jk is: " << quatD::jk()
+    std::cout << "\n\nquat.ij is: " << quat::ij() << "\nquat.jk is: " << quatD::jk()
               << "\nquat.ki is: " << quatD::ki() << "\n";
     assert(quatD::ij() == quatD::k());
     assert(quatD::jk() == quatD::i());

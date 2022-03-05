@@ -18,12 +18,8 @@ public:
   //quaternion(T w_=T(), T x_=T(), T y_=T(), T z_=T())
   //: w(w_), x(x_), y(y_), z(z_) { }
   quaternion<T>();
-  quaternion<T> (<T>w, <T>,x, <T>y,<T>z);
+  quaternion<T> (T w, T x, T y,T z);
 
-  quaternion<T>& operator=(T array[4]);
-  quaternion<T>& operator=(T k);
-
-  
   static quaternion i(){return quaternion(0.0, 1.0, 0.0, 0.0);}
   static quaternion j(){return quaternion(0.0, 0.0, 1.0, 0.0);}
   static quaternion k(){return quaternion(0.0, 0.0, 0.0, 1.0);}
